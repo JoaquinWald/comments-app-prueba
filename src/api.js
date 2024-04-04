@@ -35,12 +35,12 @@ export const getComments = async () => {
 	];
 };
 
-export const createComment = async (text, parentId = null) => {
+export const createComment = async (text, parentId = null, currentUserId) => {
 	return {
-		id: Math.random().toString(36).substr(2, 9),
+		id: Math.random().toString(36).substring(2, 11),
 		body: text,
 		parentId,
-		userId: '1',
+		userId: currentUserId,
 		username: 'John',
 		createdAt: new Date().toISOString(),
 	};

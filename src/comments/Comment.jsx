@@ -2,17 +2,21 @@ import CommentForm from './CommentForm';
 
 /* eslint-disable react/prop-types */
 const Comment = ({ comment, replies, currentUserId, deleteComment, activeComment, setActiveComment, parentId = null, addComment, updateComment }) => {
-	// Renderiza el contenido del comentario y luego, si hay respuestas, renderiza recursivamente el componente Comment (este) para cada respuesta.
+	// Renderiza el contenido del comentario y luego, si hay respuestas, renderiza recursivamente el componente Comment (éste) para cada respuesta.
+
 	const fiveMinutes = 300000;
 	const timePassed = new Date() - new Date(comment.createdAt) > fiveMinutes;
 
 	const canReply = Boolean(currentUserId);
 	const canEdit = currentUserId === comment.userId && !timePassed;
 	const canDelete = currentUserId === comment.userId && !timePassed;
+
 	const createdAt = new Date(comment.createdAt).toLocaleDateString();
+
 	const isReplying = activeComment && activeComment.type === 'replying' && activeComment.id === comment.id;
-	const isEditing = activeComment && activeComment.type === 'editing' && activeComment.id === comment.id;
 	const replyId = parentId ? parentId : comment.id;
+
+	const isEditing = activeComment && activeComment.type === 'editing' && activeComment.id === comment.id;
 
 	return (
 		<div className='comment'>

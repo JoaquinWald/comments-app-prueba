@@ -14,7 +14,6 @@ const Comments = ({ currentUserId }) => {
 	const [activeComment, setActiveComment] = useState(null);
 
 	const rootComments = backendComments.filter((backendComment) => backendComment.parentId === null);
-	// console.log(rootComments);
 
 	const getReplies = (commentID) => {
 		return backendComments
@@ -23,8 +22,8 @@ const Comments = ({ currentUserId }) => {
 	};
 
 	const addComment = (text, parentId) => {
-		console.log('addComment', text, parentId);
-		createCommentApi(text, parentId).then((comment) => {
+		// console.log('addComment', text, parentId);
+		createCommentApi(text, parentId, currentUserId).then((comment) => {
 			setBackendComments([comment, ...backendComments]);
 			setActiveComment(null);
 		});
@@ -45,6 +44,7 @@ const Comments = ({ currentUserId }) => {
 				if (backendComment.id === commentID) {
 					return { ...backendComment, body: text };
 				}
+				//debo poner este return backendComment; ya que los métodos (map,etc.) así lo exigen, como en este caso no puedo ponerlo de manera implícita entre paréntesis xq dentro hay una lógica un poco más compleja.
 				return backendComment;
 			});
 			setBackendComments(updateBackendComment);

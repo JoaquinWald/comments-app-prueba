@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-const CommentForm = ({ handleSubmit, submitLabel, hasCancelButton = false, initialText = '', handleCancel }) => {
+const CommentForm = ({ submitLabel, handleSubmit, hasCancelButton = false, initialText = '', handleCancel }) => {
 	const [text, setText] = useState(initialText);
 	const isTextareaDisabled = text.length === 0;
 	const onSubmit = (e) => {
